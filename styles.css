@@ -1,0 +1,702 @@
+/* Material You Android Translucent Theme */
+
+:root {
+    --blur-intensity: 20px;
+    --glass-opacity: 0.08;
+    --glass-border: rgba(255, 255, 255, 0.12);
+    
+    /* Material You Palette (Translucent Glass variations) */
+    --md-bg-dark: #0f1113;
+    --md-text-primary: #e3e3e3;
+    --md-text-secondary: #909090;
+    
+    /* Material You Digit Keys */
+    --md-digit-bg: rgba(255, 255, 255, 0.08);
+    --md-digit-text: #e3e3e3;
+    
+    /* Material You Functional Keys (AC, (), %) */
+    --md-func-bg: rgba(232, 240, 254, 0.12);
+    --md-func-text: #c2e7ff;
+    
+    /* Material You Operator Keys */
+    --md-operator-bg: rgba(255, 183, 77, 0.15);
+    --md-operator-text: #ffb74d;
+    --md-operator-glow: 0 0 15px rgba(255, 183, 77, 0.4);
+    
+    /* Material You Equal Key */
+    --md-equal-bg: rgba(168, 199, 250, 0.85);
+    --md-equal-text: #041e49;
+    
+    --font-primary: 'Roboto', 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+}
+
+body {
+    background-color: #08090a;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--md-text-primary);
+}
+
+/* Wallpaper System */
+.wallpaper-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.wallpaper-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
+}
+
+/* Wallpaper Thumb Classes */
+.wp-neon_fluid { background-image: url('assets/wallpapers/neon_fluid.png'); }
+.wp-light_gradient { background-image: url('assets/wallpapers/light_gradient.png'); }
+.wp-radial_glow { background-image: radial-gradient(circle, #222533, #07080a 90%); }
+.wp-mesh_orange { background-image: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); }
+
+/* Glassmorphism Panel styles */
+.glass-panel {
+    background: rgba(15, 17, 19, 0.5); /* darkened for Android Material feel */
+    backdrop-filter: blur(var(--blur-intensity)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--blur-intensity)) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Workspace Frame styling */
+.app-workspace {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+/* Material You Phone Mockup (Desktop View) */
+.calculator-container {
+    width: 390px;
+    height: 800px;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    padding-bottom: 8px;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Status bar removed — no simulated bars */
+
+
+/* Android Header (Left Aligned Title) */
+.android-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 12px 8px 12px; /* padded for no status bar */
+    margin-bottom: 8px;
+    z-index: 5;
+}
+
+.font-action {
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: var(--font-primary);
+    color: var(--md-func-text);
+}
+
+.icon-btn-header.active-mode {
+    background: rgba(168, 199, 250, 0.2);
+    color: #a8c7fa;
+    border: 1px solid rgba(168, 199, 250, 0.25);
+    border-radius: 16px;
+    font-weight: 600;
+}
+
+.app-title {
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--md-text-primary);
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.icon-btn-header {
+    border: none;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--md-text-primary);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.icon-btn-header:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+/* Display */
+.display-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-shrink: 0;
+    height: 170px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+}
+
+.display-formula {
+    font-size: 1.3rem;
+    color: var(--md-text-secondary);
+    min-height: 28px;
+    text-align: right;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    font-weight: 300;
+}
+
+.display-formula::-webkit-scrollbar {
+    display: none;
+}
+
+.display-main {
+    font-size: 3.8rem;
+    font-weight: 300;
+    text-align: right;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    transition: font-size 0.15s ease-out;
+}
+
+.display-main::-webkit-scrollbar {
+    display: none;
+}
+
+/* Android divider line */
+.android-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 8px 12px 16px 12px;
+}
+
+/* Grid Screens */
+.screens-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.calc-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+}
+
+.calc-screen.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.android-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 12px;
+    height: 100%;
+    padding-bottom: 8px;
+}
+
+.scientific-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 8px;
+    height: 100%;
+    padding-bottom: 8px;
+}
+
+.btn-scientific {
+    background: rgba(255, 255, 255, 0.05);
+    color: #a8c7fa;
+    font-size: 1.1rem;
+    font-weight: 400;
+    border-radius: 20px;
+}
+
+.btn-scientific:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.span-three {
+    grid-column: span 3;
+    border-radius: 28px;
+}
+
+/* Android Buttons Styles (Material You Rounded Squircles) */
+.btn {
+    border: none;
+    border-radius: 28px; /* Material You rounded rectangle style */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--md-text-primary);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-digit {
+    background: var(--md-digit-bg);
+}
+
+.btn-digit:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.btn-functional {
+    background: var(--md-func-bg);
+    color: var(--md-func-text);
+    font-weight: 500;
+}
+
+.btn-functional:hover {
+    background: rgba(232, 240, 254, 0.2);
+}
+
+.btn-operator {
+    background: var(--md-operator-bg);
+    color: var(--md-operator-text);
+    font-size: 1.8rem;
+}
+
+.btn-operator:hover {
+    background: rgba(255, 183, 77, 0.25);
+}
+
+.btn-operator.active-operator {
+    background: #ffb74d;
+    color: #0f1113;
+    font-weight: 600;
+    box-shadow: var(--md-operator-glow);
+}
+
+.btn-equals {
+    background: var(--md-equal-bg);
+    color: var(--md-equal-text);
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.btn-equals:hover {
+    background: rgba(168, 199, 250, 1.0);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Material Click Ripple Effect */
+.ripple-element {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(0);
+    animation: ripple-effect 0.45s cubic-bezier(0.1, 0.8, 0.3, 1);
+    pointer-events: none;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(3.5);
+        opacity: 0;
+    }
+}
+
+/* Simulated navigation bar styles removed */
+
+/* Android Drawers (Bottom Sheets) */
+.bottom-sheet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 75%;
+    border-radius: 28px 28px 0 0;
+    z-index: 100;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bottom-sheet.open {
+    transform: translateY(0);
+}
+
+.sheet-drag-handle {
+    width: 36px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    margin: 8px auto 0 auto;
+}
+
+.overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.overlay-header h3 {
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.close-overlay-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--md-text-primary);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.overlay-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+}
+
+.overlay-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.overlay-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+}
+
+/* Settings List Elements */
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.setting-item span {
+    font-size: 0.95rem;
+}
+
+/* Inline glass dropdown for settings (Time Changer) */
+.glass-select {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    color: var(--md-text-primary);
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    max-width: 160px;
+    -webkit-appearance: none;
+    appearance: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.2s;
+}
+.glass-select:focus {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: #a8c7fa;
+}
+
+.settings-section-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--md-text-secondary);
+    margin: 20px 0 10px 0;
+}
+
+.wallpaper-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.wallpaper-thumb {
+    height: 80px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid transparent;
+    transition: all 0.25s;
+    background-size: cover;
+    background-position: center;
+}
+
+.wallpaper-thumb span {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+}
+
+.wallpaper-thumb.active {
+    border-color: #a8c7fa;
+    box-shadow: 0 0 10px rgba(168, 199, 250, 0.4);
+}
+
+/* Android Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider-round {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: .25s cubic-bezier(0.2, 0.8, 0.3, 1);
+    border-radius: 24px;
+}
+
+.slider-round:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    transition: .25s cubic-bezier(0.2, 0.8, 0.3, 1);
+    border-radius: 50%;
+}
+
+input:checked + .slider-round {
+    background-color: #a8c7fa; /* Material Light Blue */
+}
+
+input:checked + .slider-round:before {
+    transform: translateX(20px);
+    background-color: #041e49; /* Dark core accent */
+}
+
+/* Custom Range Input */
+.range-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.glass-range {
+    -webkit-appearance: none;
+    width: 100px;
+    background: rgba(255, 255, 255, 0.15);
+    height: 4px;
+    border-radius: 2px;
+    outline: none;
+}
+
+.glass-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #a8c7fa;
+    cursor: pointer;
+}
+
+#blurVal {
+    font-size: 0.85rem;
+    min-width: 35px;
+}
+
+/* History overlay content */
+.history-actions {
+    padding: 10px 20px 0 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.history-action-btn {
+    border: none;
+    background: transparent;
+    color: var(--md-operator-text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 12px;
+    transition: background 0.2s;
+}
+
+.history-action-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.history-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.history-item {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.history-item-formula {
+    font-size: 0.85rem;
+    color: var(--md-text-secondary);
+    word-break: break-all;
+    text-align: right;
+}
+
+.history-item-result {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--md-text-primary);
+}
+
+.empty-history-msg {
+    text-align: center;
+    color: var(--md-text-secondary);
+    font-size: 0.9rem;
+    padding-top: 40px;
+}
+
+/* Glow Customizations */
+.enable-glows .btn-equals {
+    box-shadow: 0 4px 15px rgba(168, 199, 250, 0.35), 0 0 20px rgba(168, 199, 250, 0.2);
+}
+.enable-glows .btn-operator.active-operator {
+    box-shadow: var(--md-operator-glow);
+}
+.enable-glows .calculator-container {
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 255, 255, 0.03);
+}
+
+/* Responsiveness media queries (iPhone and Android) */
+@media (max-width: 480px) {
+    body {
+        align-items: stretch;
+    }
+    
+    .app-workspace {
+        padding: 0;
+    }
+    
+    .calculator-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+    
+    .android-status-bar {
+        padding-top: 12px;
+        height: 44px;
+    }
+    
+    .android-nav-bar {
+        display: none; /* hide simulated bar on real mobile devices to prevent double nav bar */
+    }
+}

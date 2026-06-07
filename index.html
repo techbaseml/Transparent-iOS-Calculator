@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material You Translucent Calculator</title>
+    <!-- Premium Google Fonts: Roboto and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Full-screen Dynamic Wallpaper Container -->
+    <div class="wallpaper-container" id="wallpaperContainer">
+        <div class="wallpaper-overlay"></div>
+    </div>
+
+    <!-- Main Workspace Container -->
+    <div class="app-workspace">
+        
+        <!-- Android Style Mobile Window Container (Centered on desktop, full screen on mobile) -->
+        <div class="calculator-container glass-panel">
+            
+            <!-- Android Style Header Bar (Left-aligned title + time, and action toggles) -->
+            <div class="android-header">
+                <div class="app-title" id="appTitle">Calculator</div>
+                <div class="header-actions">
+                    <button class="icon-btn-header font-action" id="sciToggleBtn" title="Toggle Scientific Mode">Sci</button>
+                    <button class="icon-btn-header" id="historyToggleBtn" title="History">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                        </svg>
+                    </button>
+                    <button class="icon-btn-header" id="settingsToggleBtn" title="Settings">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Display Area -->
+            <div class="display-container">
+                <div class="display-formula" id="displayFormula"></div>
+                <div class="display-main" id="displayMain">0</div>
+            </div>
+
+            <!-- Horizontal divider line common in Android -->
+            <div class="android-divider"></div>
+
+            <!-- Keys Screen Layout -->
+            <div class="screens-container">
+                
+                <!-- 1. Standard Calculator Screen -->
+                <div class="calc-screen active" id="standardScreen">
+                    <div class="buttons-grid android-grid">
+                        <button class="btn btn-functional ripple" data-action="clear">AC</button>
+                        <button class="btn btn-functional ripple" data-action="sci" data-val="paren">()</button>
+                        <button class="btn btn-functional ripple" data-action="percent">%</button>
+                        <button class="btn btn-operator ripple" data-action="operator" data-val="/">÷</button>
+
+                        <button class="btn btn-digit ripple" data-val="7">7</button>
+                        <button class="btn btn-digit ripple" data-val="8">8</button>
+                        <button class="btn btn-digit ripple" data-val="9">9</button>
+                        <button class="btn btn-operator ripple" data-action="operator" data-val="*">×</button>
+
+                        <button class="btn btn-digit ripple" data-val="4">4</button>
+                        <button class="btn btn-digit ripple" data-val="5">5</button>
+                        <button class="btn btn-digit ripple" data-val="6">6</button>
+                        <button class="btn btn-operator ripple" data-action="operator" data-val="-">−</button>
+
+                        <button class="btn btn-digit ripple" data-val="1">1</button>
+                        <button class="btn btn-digit ripple" data-val="2">2</button>
+                        <button class="btn btn-digit ripple" data-val="3">3</button>
+                        <button class="btn btn-operator ripple" data-action="operator" data-val="+">+</button>
+
+                        <button class="btn btn-digit ripple" data-val="0">0</button>
+                        <button class="btn btn-digit ripple" data-val=".">.</button>
+                        <button class="btn btn-digit ripple" data-action="backspace">⌫</button>
+                        <button class="btn btn-equals ripple" data-action="calculate">=</button>
+                    </div>
+                </div>
+
+                <!-- 2. Scientific Calculator Screen -->
+                <div class="calc-screen" id="scientificScreen">
+                    <div class="buttons-grid scientific-grid">
+                        <!-- Row 1 -->
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="deg">Deg</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="sin">sin</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="cos">cos</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="tan">tan</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="ln">ln</button>
+
+                        <!-- Row 2 -->
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="log">log</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="pi">π</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="e">e</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="sqrt">√</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="pow">^</button>
+
+                        <!-- Row 3 -->
+                        <button class="btn btn-functional ripple" data-action="clear">AC</button>
+                        <button class="btn btn-functional ripple" data-action="sci" data-val="paren">()</button>
+                        <button class="btn btn-functional ripple" data-action="percent">%</button>
+                        <button class="btn btn-operator ripple" data-action="operator" data-val="/">÷</button>
+                        <button class="btn btn-functional ripple" data-action="backspace">⌫</button>
+
+                        <!-- Row 4 -->
+                        <button class="btn btn-digit ripple" data-val="7">7</button>
+                        <button class="btn btn-digit ripple" data-val="8">8</button>
+                        <button class="btn btn-digit ripple" data-val="9">9</button>
+                        <button class="btn btn-operator ripple" data-action="operator" data-val="*">×</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="factorial">!</button>
+
+                        <!-- Row 5 -->
+                        <button class="btn btn-digit ripple" data-val="4">4</button>
+                        <button class="btn btn-digit ripple" data-val="5">5</button>
+                        <button class="btn btn-digit ripple" data-val="6">6</button>
+                        <button class="btn btn-operator ripple" data-action="operator" data-val="-">−</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="exp">exp</button>
+
+                        <!-- Row 6 -->
+                        <button class="btn btn-digit ripple" data-val="1">1</button>
+                        <button class="btn btn-digit ripple" data-val="2">2</button>
+                        <button class="btn btn-digit ripple" data-val="3">3</button>
+                        <button class="btn btn-operator ripple" data-action="operator" data-val="+">+</button>
+                        <button class="btn btn-scientific ripple" data-action="sci" data-val="rand">rand</button>
+
+                        <!-- Row 7 -->
+                        <button class="btn btn-digit ripple" data-val="0">0</button>
+                        <button class="btn btn-digit ripple" data-val=".">.</button>
+                        <button class="btn btn-equals span-three ripple" data-action="calculate">=</button>
+                    </div>
+                </div>
+
+            </div> <!-- End Screens Container -->
+
+            <!-- Drawers / Sliders (Android Bottom Sheets) -->
+            
+            <!-- A. Settings Bottom Sheet -->
+            <div class="overlay-panel bottom-sheet glass-panel" id="settingsPanel">
+                <!-- Bottom sheet drag handle indicator -->
+                <div class="sheet-drag-handle"></div>
+                <div class="overlay-header">
+                    <h3>Settings</h3>
+                    <button class="close-overlay-btn" id="closeSettingsBtn">✕</button>
+                </div>
+                <div class="overlay-content">
+                    <div class="setting-item">
+                        <span>Time Changer</span>
+                        <select id="timeFormatSelect" class="glass-select">
+                            <option value="in">Indian Time (24h)</option>
+                            <option value="us">US Time (12h AM/PM)</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <span>Click Sounds</span>
+                        <label class="switch">
+                            <input type="checkbox" id="soundSwitch" checked>
+                            <span class="slider-round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>Button Glow Effects</span>
+                        <label class="switch">
+                            <input type="checkbox" id="glowSwitch" checked>
+                            <span class="slider-round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>Glass Blur Density</span>
+                        <div class="range-container">
+                            <input type="range" id="blurRange" min="5" max="40" value="20" class="glass-range">
+                            <span id="blurVal">20px</span>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section-title">Select Wallpaper</div>
+                    <div class="wallpaper-grid">
+                        <div class="wallpaper-thumb active" data-wallpaper="neon_fluid" style="background: linear-gradient(135deg, #1f005c, #5b0060, #870060, #ac005c, #c8004f, #dd003b, #eb0021, #f50000);">
+                            <span>Neon Fluid</span>
+                        </div>
+                        <div class="wallpaper-thumb" data-wallpaper="light_gradient" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb, #90caf9, #64b5f6);">
+                            <span>Soft Light</span>
+                        </div>
+                        <div class="wallpaper-thumb" data-wallpaper="radial_glow" style="background: radial-gradient(circle, #2c3e50, #000000);">
+                            <span>Radial Glow</span>
+                        </div>
+                        <div class="wallpaper-thumb" data-wallpaper="mesh_orange" style="background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);">
+                            <span>Sunset Mesh</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B. History Bottom Sheet -->
+            <div class="overlay-panel bottom-sheet glass-panel" id="historyPanel">
+                <div class="sheet-drag-handle"></div>
+                <div class="overlay-header">
+                    <h3>Calculation History</h3>
+                    <button class="close-overlay-btn" id="closeHistoryBtn">✕</button>
+                </div>
+                <div class="history-actions">
+                    <button class="history-action-btn" id="clearHistoryBtn">Clear All</button>
+                </div>
+                <div class="overlay-content history-list-container" id="historyList">
+                    <div class="empty-history-msg">No history yet</div>
+                </div>
+            </div>
+
+        </div> <!-- End Calculator Container -->
+
+    </div> <!-- End App Workspace -->
+
+    <script src="app.js"></script>
+</body>
+</html>
