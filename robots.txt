@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://techbaseml.github.io/Transparent-iOS-Calculator/sitemap.xml
